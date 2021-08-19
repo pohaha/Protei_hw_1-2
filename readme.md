@@ -8,3 +8,9 @@
 * run "configure.sh" to create a configuration of a project
 * run "build.sh" to build the project
 * run "run.sh" to run the built project
+
+# TODO
+* integrate hw#2 in this:\
+make it so that one application sends output of a openssl parser element by element,\
+second application reads the contents of a txt file and verifies them with read elements from parser one by one\
+therefore - using shared memory for communication!
