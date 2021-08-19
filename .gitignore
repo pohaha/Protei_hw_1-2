@@ -1,5 +1,11 @@
+# security ignores
 cert.pem
 key.pem
-[Bb][Uu][Ii][Ll][Dd]/
 test_digest.txt
+
+# cmake ignores
+[Bb][Uu][Ii][Ll][Dd]/
+
+#vs code ignores
+.vscode/
 
