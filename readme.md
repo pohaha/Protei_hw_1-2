@@ -7,3 +7,4 @@
 
 * run "configure.sh" to create a configuration of a project
 * run "build.sh" to build the project
+* run "run.sh" to run the built project
