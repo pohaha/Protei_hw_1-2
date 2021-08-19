@@ -1,0 +1,5 @@
+class certificate
+{
+    certificate();
+    ~certificate();
+};
