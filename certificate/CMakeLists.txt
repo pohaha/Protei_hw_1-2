@@ -3,7 +3,6 @@ add_library(Certificate "src/certificate.cpp")
 find_package(OpenSSL REQUIRED)
 list(APPEND EXTRA_LINKED_SOURCES OpenSSL::SSL)
 
-#add_subdirectory("${PROJECT_SOURCE_DIR}/fingerprint")
 list(APPEND EXTRA_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/fingerprint/includes")
 list(APPEND EXTRA_LIBRARY_DIRECTORIES "${PROJECT_SOURCE_DIR}/fingerprint")
 list(APPEND EXTRA_LINKED_SOURCES Fingerprint)
