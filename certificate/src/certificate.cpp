@@ -11,6 +11,7 @@
 
 Certificate::Certificate()
 {
+   std::cout<<"started populating certificate"<<std::endl;
    cert = BIO_new_file("../../cert.pem", "rb");
    if(cert == NULL)
    {
@@ -46,8 +47,8 @@ Certificate::Certificate()
         if(pos!=(digest_size-1))ashex <<":";
     }
     //end of the segment
-
     m_fingerprint = Fingerprint(ashex.str());
+    std::cout<<"finished populating certificate"<<std::endl;
   
 }
 

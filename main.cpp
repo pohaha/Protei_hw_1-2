@@ -9,9 +9,8 @@
 int main()
 {
     Certificate test;
-
-    std::cout<<"here!"<<std::endl;
-    test.get_fingerprint().show();
+    Fingerprint certificate_fingerprint = test.get_fingerprint();
+    certificate_fingerprint.show();  
     
     Fingerprint test_fingerprint("../../test_digest.txt");
     test_fingerprint.show();
