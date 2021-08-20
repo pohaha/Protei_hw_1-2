@@ -1,11 +1,13 @@
 #pragma once
-#include <certificate.h>
 #include <memory>
 #include <openssl/pem.h>
 #include <openssl/x509.h>
 #include <iostream>
 #include <sstream>
 #include <string>
+
+#include <certificate.h>
+#include <fingerprint.h>
 
 Certificate::Certificate()
 {
@@ -33,6 +35,19 @@ Certificate::Certificate()
        error_occured = true;
        return;
    }
+
+   //transaction of output - gotten from stackoverflow (some numbers magic that helps represent digest in a fingerprint format)
+    static const char hexbytes[] = "0123456789ABCDEF";
+    std::stringstream ashex;
+    for(int pos = 0; pos < digest_size; pos++)
+    {
+        ashex << hexbytes[ (digest[pos]&0xf0)>>4 ];        
+        ashex << hexbytes[ (digest[pos]&0x0f)>>0 ];
+        if(pos!=(digest_size-1))ashex <<":";
+    }
+    //end of the segment
+
+    m_fingerprint = Fingerprint(ashex.str());
   
 }
 
@@ -44,17 +59,12 @@ Certificate::~Certificate()
 
 void Certificate::show()
 {
-    //transaction of output - gotten from stackoverflow (some numbers magic that helps represent digest in a fingerprint format)
     if(error_occured) std::cout << "error occured - unable to show digest"<<std::endl;
-    static const char hexbytes[] = "0123456789ABCDEF";
-    std::stringstream ashex;
-    for(int pos = 0; pos < digest_size; pos++)
-    {
-        ashex << hexbytes[ (digest[pos]&0xf0)>>4 ];        
-        ashex << hexbytes[ (digest[pos]&0x0f)>>0 ];
-        if(pos!=(digest_size-1))ashex <<":";
-    }
-    //end of the segment
-    
-    std::cout<<ashex.str()<<std::endl;  
+    std::cout<<"fingerprint: " <<std::endl;
+    m_fingerprint.show();      
+}
+
+Fingerprint Certificate::get_fingerprint()
+{
+    return m_fingerprint;
 }
