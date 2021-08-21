@@ -14,7 +14,7 @@ int main()
     certificate_fingerprint.show();  
     std::cout<<std::endl;
 
-    Fingerprint test_fingerprint("../../test_digest.txt");
+    Fingerprint test_fingerprint("../../../consumer/test_digest.txt");
     std::cout<<"\nterminal fingerprint output:"<<std::endl;
     test_fingerprint.show();
     std::cout<<std::endl;
