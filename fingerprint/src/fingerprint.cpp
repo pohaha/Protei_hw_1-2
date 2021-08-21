@@ -28,11 +28,6 @@ Fingerprint::Fingerprint(std::string string_fingerprint)
     parse_from_string(string_fingerprint);
 }
 
-Fingerprint::Fingerprint()
-{
-    
-}
-
 Fingerprint& Fingerprint::operator= (const Fingerprint& other)
 {
     if (this!=(&other))
@@ -87,6 +82,16 @@ void Fingerprint::show()
     std::cout<<std::endl;
 }
 
+
+bool Fingerprint::split_in_packages(Package& placeholder)
+{
+
+}
+
+Package generate_package(const std::string& type, int id)
+{
+
+}
 Fingerprint::~Fingerprint()
 {
     delete[] m_values;

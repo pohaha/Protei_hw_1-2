@@ -1,4 +1,3 @@
-#pragma once
 #include <package.h>
 
 #define BUFFER_SIZE 10
