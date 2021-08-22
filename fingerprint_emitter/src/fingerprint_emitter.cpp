@@ -27,6 +27,8 @@ bool Fingerprint_Emitter::send()
     void* protocol;
     message_box = shmat(shared_package_id, NULL, 0);
     protocol = shmat(shared_status_memory_id, NULL, 0);
+    
+    //conversation protocol initiation
     int current_package_status = 0;
 
     while(current_stage!=Stage::Finished)
@@ -37,17 +39,25 @@ bool Fingerprint_Emitter::send()
         
         //protocol - sent logic
         current_package_status = (int)Package_Status::Sent;
-        
+        std::memcpy(protocol, &current_package_status,sizeof(int));
+        std::cout<<"sent package: "<<std::endl;
+        current_package.show();
+
         //await response
         while(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
         {
             //do nothing i gues...
+            std::cout<<"Current trasnferred package:"<<std::endl;
+            (*(static_cast<Package*>(message_box))).show();
             std::cout<<"press any key"<<std::endl;
             std::cin.get();
             if(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
                 std::cout<<"no response from reciever yet"<<std::endl;
         }
     }
+
+    delete message_box;
+    delete protocol;
     return true;
 }
 
