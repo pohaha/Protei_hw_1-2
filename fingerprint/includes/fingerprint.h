@@ -12,15 +12,16 @@ class Fingerprint
         Fingerprint(std::string string_fingerprint);
 
         void show();
-        bool split_in_packages(Package& placeholder);
+        unsigned int get_size();
 
+        const std::string& operator[](std::size_t id);
 
         Fingerprint() = default;
         Fingerprint(const Fingerprint& other);
         Fingerprint& operator= (const Fingerprint& other);
         ~Fingerprint();
+        
     private:
-        Package generate_package(const std::string& type, int id = 0);
         std::string* m_values = nullptr;
         unsigned int m_size = 0;
         void parse_from_string(std::string full_fingerprint);

@@ -11,6 +11,11 @@ list(APPEND EXTRA_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/../certificate/incl
 list(APPEND EXTRA_LIBRARY_DIRECTORIES "${PROJECT_SOURCE_DIR}/../certificate")
 list(APPEND EXTRA_LINKED_SOURCES Certificate)
 
+list(APPEND EXTRA_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/fingerprint_emitter/includes")
+list(APPEND EXTRA_LIBRARY_DIRECTORIES "${CMAKE_SOURCE_DIR}/out/build/fingerprint_emitter")
+list(APPEND EXTRA_LINKED_SOURCES Fingerprint_Emitter)
+
+
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC ${PROJECT_BINARY_DIR}

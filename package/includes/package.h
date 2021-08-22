@@ -2,28 +2,31 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-
 #define BUFFER_SIZE 10
-enum class Package_Status
+
+enum class Package_Type
 {
-    Sent,
-    Recieved,
-    Untouched
+    none,
+    control,
+    data
 };
 
-//std::ostream& operator<< (std::ostream& os, const Package_Status& status)
 
 class Package
 {
 public:
-    Package(const std::string& message);
+    Package(const std::string& message, const Package_Type& type);
     Package() = default;
-    void set_status(const Package_Status& new_status);
+
+    Package(const Package& other);
+    Package& operator=(const Package& other);
+    ~Package() = default;
+    
     void show();
-    void export_content(void* mailbox);
-    void import_content(void* mailbox);
+
+
 private:
+    Package_Type m_type = Package_Type::none;
     std::size_t m_size = 0;
-    Package_Status m_status = Package_Status::Untouched;
     char m_buff[BUFFER_SIZE];
 };

@@ -28,6 +28,42 @@ Fingerprint::Fingerprint(std::string string_fingerprint)
     parse_from_string(string_fingerprint);
 }
 
+
+void Fingerprint::show()
+{
+    for(unsigned int i = 0; i < m_size; i++)
+    {
+        std::cout<<m_values[i];
+        if(i != m_size-1) std::cout<<":";
+    }
+    std::cout<<std::endl;
+}
+
+unsigned int Fingerprint::get_size()
+{
+    return m_size;
+}
+
+
+const std::string& Fingerprint::operator[](std::size_t id)
+{
+    if(id >= m_size)
+    {
+        std::cout<<"out of bounds error"<<std::endl;
+        return (std::string("ERROR"));
+    }
+    return m_values[id];
+}
+
+
+Fingerprint::Fingerprint(const Fingerprint& other)
+{
+    m_size = other.m_size;
+    m_values = new std::string[m_size];
+    for(unsigned int i=0;i<m_size;i++)
+        m_values[i] = other.m_values[i];
+}
+
 Fingerprint& Fingerprint::operator= (const Fingerprint& other)
 {
     if (this!=(&other))
@@ -40,13 +76,11 @@ Fingerprint& Fingerprint::operator= (const Fingerprint& other)
     return *this;
 }
 
-Fingerprint::Fingerprint(const Fingerprint& other)
+Fingerprint::~Fingerprint()
 {
-    m_size = other.m_size;
-    m_values = new std::string[m_size];
-    for(unsigned int i=0;i<m_size;i++)
-        m_values[i] = other.m_values[i];
+    delete[] m_values;
 }
+
 
 void Fingerprint::parse_from_string(std::string parsed_string)
 {    
@@ -72,27 +106,4 @@ void Fingerprint::parse_from_string(std::string parsed_string)
     std::cout<<"parsed fingerprint from string successfully"<<std::endl;
 }
 
-void Fingerprint::show()
-{
-    for(unsigned int i = 0; i < m_size; i++)
-    {
-        std::cout<<m_values[i];
-        if(i != m_size-1) std::cout<<":";
-    }
-    std::cout<<std::endl;
-}
 
-
-bool Fingerprint::split_in_packages(Package& placeholder)
-{
-
-}
-
-Package generate_package(const std::string& type, int id)
-{
-
-}
-Fingerprint::~Fingerprint()
-{
-    delete[] m_values;
-}
