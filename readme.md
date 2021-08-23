@@ -27,4 +27,5 @@ once the reciever reads from shared memory - protocol memory is set to recieved 
 
 * User experience
     * make it so that there is an invitation for the recieve of the message
+    * create safeguards from connection termination
 

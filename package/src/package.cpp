@@ -38,7 +38,23 @@ Package& Package::operator=(const Package& other)
 
 void Package::show()
 {
-    std::cout<<"Package type: "<<int(m_type)<<std::endl;
+    std::string type_as_string;
+    switch (m_type)
+    {
+    case Package_Type::control:
+        type_as_string = "Control package";
+        break;
+    case Package_Type::data:
+        type_as_string = "Data package";
+        break;
+    case Package_Type::none:
+        type_as_string = "Undefined package";
+        break;
+    
+    default:
+        break;
+    }
+    std::cout<<"Package type: "<<type_as_string<<std::endl;
     std::cout<<"Content: "<<m_buff<<std::endl;
 }
 

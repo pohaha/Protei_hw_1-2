@@ -39,7 +39,7 @@ bool Fingerprint_Emitter::send()
         //protocol - sent logic
         current_package_status = (int)Package_Status::Sent;
         std::memcpy(protocol, &current_package_status,sizeof(int));
-        std::cout<<"poackage sent"<<std::endl;
+        std::cout<<"package sent"<<std::endl;
         (static_cast<Package*>(message_box))->show();
         //await response
         while(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
