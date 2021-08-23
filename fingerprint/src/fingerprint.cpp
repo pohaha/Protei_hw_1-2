@@ -1,7 +1,6 @@
 #include <fingerprint.h>
 
 
-
 bool Fingerprint::parse_from_file(const char* fingerprint_file_path)
 {
     std::cout<<"parsing fingerprint file at "<<fingerprint_file_path<<std::endl;
