@@ -2,39 +2,35 @@
 
 #define BUFFER_SIZE 10
 
-Package::Package(const std::string& message, const Package_Type& type):
-    m_type(type)
+Package::Package(const std::string &message, const Package_Type &type) : m_type(type)
 {
-    if(message.length()>=BUFFER_SIZE)
+    if (message.length() >= BUFFER_SIZE)
     {
-        std::cout<<"buffer overflow"<<std::endl;
+        std::cout << "buffer overflow" << std::endl;
         return;
     }
     m_size = message.length();
-    for(unsigned int i=0; i<m_size;i++)
+    for (unsigned int i = 0; i < m_size; i++)
         m_buff[i] = message[i];
-    m_buff[m_size] = '\0';   
+    m_buff[m_size] = '\0';
 }
 
-
-Package::Package(const Package& other):
-    m_type(other.m_type),
-    m_size(other.m_size)
+Package::Package(const Package &other) : m_type(other.m_type),
+                                         m_size(other.m_size)
 {
-    std::memcpy(m_buff,other.m_buff,sizeof(char)*BUFFER_SIZE);
+    std::memcpy(m_buff, other.m_buff, sizeof(char) * BUFFER_SIZE);
 }
 
-Package& Package::operator=(const Package& other)
+Package &Package::operator=(const Package &other)
 {
-    if (this!=&other)
+    if (this != &other)
     {
         m_type = other.m_type;
         m_size = other.m_size;
-        std::memcpy(m_buff,other.m_buff,sizeof(char)*BUFFER_SIZE);
+        std::memcpy(m_buff, other.m_buff, sizeof(char) * BUFFER_SIZE);
     }
     return *this;
 }
-
 
 void Package::show()
 {
@@ -50,12 +46,12 @@ void Package::show()
     case Package_Type::none:
         type_as_string = "Undefined package";
         break;
-    
+
     default:
         break;
     }
-    std::cout<<"Package type: "<<type_as_string<<std::endl;
-    std::cout<<"Content: "<<m_buff<<std::endl;
+    std::cout << "Package type: " << type_as_string << std::endl;
+    std::cout << "Content: " << m_buff << std::endl;
 }
 
 Package_Type Package::get_type()
@@ -65,6 +61,5 @@ Package_Type Package::get_type()
 
 std::string Package::get_data()
 {
-    return std::string(m_buff);   
+    return std::string(m_buff);
 }
-

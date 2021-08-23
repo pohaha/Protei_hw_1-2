@@ -7,7 +7,6 @@
 #include <iostream>
 #include <sys/shm.h>
 
-
 enum class Stage
 {
     None,
@@ -18,15 +17,14 @@ enum class Stage
 
 class Fingerprint_Emitter
 {
-    public:
-        Fingerprint_Emitter(const Fingerprint& data);
-        
-        bool send();
-        Package extract_package();
+public:
+    Fingerprint_Emitter(const Fingerprint &data);
 
-    private:
-        Stage current_stage = Stage::None;
-        Fingerprint m_data;
-        std::size_t current_id = 0;
+    bool send();
+    Package extract_package();
 
+private:
+    Stage current_stage = Stage::None;
+    Fingerprint m_data;
+    std::size_t current_id = 0;
 };
