@@ -4,6 +4,14 @@
 #include <cstring>
 #define BUFFER_SIZE 10
 
+
+enum class Package_Status
+{
+    Untouched,
+    Sent,
+    Recieved
+};
+
 enum class Package_Type
 {
     none,
@@ -23,6 +31,8 @@ public:
     ~Package() = default;
     
     void show();
+    Package_Type get_type();
+    std::string get_data();
 
 
 private:

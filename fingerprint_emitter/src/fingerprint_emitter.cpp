@@ -10,8 +10,7 @@ bool Fingerprint_Emitter::send()
     //create shared memory - aquire it's id
     int shared_status_memory_id;
     int shared_package_id;
-
-    //note to self - 0666 is wierd AF bitmask - do not touch
+        //note to self - 0666 is wierd AF bitmask - do not touch
     shared_package_id = shmget(key_t(9877), sizeof(Package), IPC_CREAT | 0666);
     shared_status_memory_id = shmget(key_t(9876), sizeof(int), IPC_CREAT | 0666);
     if((shared_status_memory_id < 0) ||  //or
@@ -47,8 +46,6 @@ bool Fingerprint_Emitter::send()
         while(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
         {
             //do nothing i gues...
-            std::cout<<"Current trasnferred package:"<<std::endl;
-            (*(static_cast<Package*>(message_box))).show();
             std::cout<<"press any key"<<std::endl;
             std::cin.get();
             if(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))

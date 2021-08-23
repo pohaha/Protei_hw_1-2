@@ -42,5 +42,13 @@ void Package::show()
     std::cout<<"Content: "<<m_buff<<std::endl;
 }
 
+Package_Type Package::get_type()
+{
+    return m_type;
+}
 
+std::string Package::get_data()
+{
+    return std::string(m_buff);   
+}
 

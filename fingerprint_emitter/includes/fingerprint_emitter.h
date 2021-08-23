@@ -6,13 +6,6 @@
 #include <sys/shm.h>
 
 
-enum class Package_Status
-{
-    Untouched,
-    Sent,
-    Recieved
-};
-
 enum class Stage
 {
     None,

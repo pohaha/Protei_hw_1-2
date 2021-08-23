@@ -1,12 +1,9 @@
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <fstream>
-#include <vector>
-
+#include <fingerprint_emitter.h>
 #include <certificate.h>
 #include <fingerprint.h>
-#include <fingerprint_emitter.h>
+
+#include <iostream>
+
 int main()
 {
     Certificate test;
