@@ -38,7 +38,8 @@ bool Fingerprint::parse_from_string(std::string parsed_string)
             new_values[i] = m_values[i];
         delete[] m_values;
         new_values[m_size] = element;
-        m_size++;
+        //codereview #6
+        ++m_size;
         m_values = new_values;
     }
 

@@ -69,7 +69,7 @@ Package Fingerprint_Emitter::extract_package()
 
     case Stage::Data_Package:
         message = Package(m_data[current_id],Package_Type::data);
-        current_id++;
+        ++current_id;
         if(current_id == m_data.get_size())
             current_stage = Stage::Finished;
         break;
