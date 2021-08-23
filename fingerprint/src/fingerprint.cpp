@@ -1,7 +1,8 @@
 #include <fingerprint.h>
 
 
-Fingerprint::Fingerprint(const char* fingerprint_file_path)
+
+bool Fingerprint::parse_from_file(const char* fingerprint_file_path)
 {
     std::cout<<"parsing fingerprint file at "<<fingerprint_file_path<<std::endl;
     std::ifstream fingerprint_file;
@@ -11,22 +12,51 @@ Fingerprint::Fingerprint(const char* fingerprint_file_path)
     {
         //TODO error handling
         std::cout<<"error opening \""<<fingerprint_file_path<<"\""<<std::endl;
-        return;        
+        return m_valid = false;
     }
     getline(fingerprint_file,full_fingerprint);
     fingerprint_file.close();
-    parse_from_string(full_fingerprint);
-    std::cout<<"parsing fingerprint file successfull"<<std::endl;
+    return parse_from_string(full_fingerprint);
 }
 
-Fingerprint::Fingerprint(std::string string_fingerprint)
-{
-    parse_from_string(string_fingerprint);
+bool Fingerprint::parse_from_string(std::string parsed_string)
+{    
+    std::cout<<"started parsing fingerprint from string"<<std::endl;
+    std::size_t trash_delimetr = parsed_string.find('=');
+    if(trash_delimetr!=std::string::npos)
+    {
+        std::cout<<"removing trash: "<<parsed_string.substr(0,trash_delimetr+1)<<std::endl;
+        parsed_string = parsed_string.substr(trash_delimetr+1);
+    }
+    std::stringstream split_stream(parsed_string);
+    std::string element;
+    while(std::getline(split_stream,element,':'))
+    {
+        m_valid = true;
+        std::string* new_values = new std::string[m_size+1];
+        for(unsigned int i=0;i<m_size;i++)
+            new_values[i] = m_values[i];
+        delete[] m_values;
+        new_values[m_size] = element;
+        m_size++;
+        m_values = new_values;
+    }
+
+    if(m_valid)
+        std::cout<<"fingerprint generation successfull"<<std::endl;
+    else
+        std::cout<<"ERROR occured during parcing fingerprint from string"<<std::endl;
+    return m_valid;
 }
 
 
 void Fingerprint::show()
 {
+    if(not m_valid)
+    {
+        std::cout<<"fingerprint currently invalid"<<std::endl;
+        return;
+    }
     for(unsigned int i = 0; i < m_size; i++)
     {
         std::cout<<m_values[i];
@@ -40,9 +70,19 @@ unsigned int Fingerprint::get_size()
     return m_size;
 }
 
+bool Fingerprint::is_valid() const
+{
+    return m_valid;
+}
+
 
 const std::string& Fingerprint::operator[](std::size_t id)
 {
+    if (not m_valid)
+    {
+        show();
+        return std::string();
+    }    
     if(id >= m_size)
     {
         std::cout<<"out of bounds error"<<std::endl;
@@ -54,20 +94,34 @@ const std::string& Fingerprint::operator[](std::size_t id)
 
 Fingerprint::Fingerprint(const Fingerprint& other)
 {
+    if (not other.is_valid())
+    {
+        std::cout<<"target is invalid"<<std::endl;
+        m_valid = false;
+        return;
+    }
     m_size = other.m_size;
     m_values = new std::string[m_size];
     for(unsigned int i=0;i<m_size;i++)
         m_values[i] = other.m_values[i];
+    m_valid = true;
 }
 
 Fingerprint& Fingerprint::operator= (const Fingerprint& other)
 {
+    if (not other.is_valid())
+    {
+        std::cout<<"target is invalid"<<std::endl;
+        m_valid = false;
+        return *this;
+    }
     if (this!=(&other))
     {
         m_size = other.m_size;
         m_values = new std::string[m_size];
         for(unsigned int i=0;i<m_size;i++)
             m_values[i] = other.m_values[i];
+        m_valid = true;
     }
     return *this;
 }
@@ -78,28 +132,6 @@ Fingerprint::~Fingerprint()
 }
 
 
-void Fingerprint::parse_from_string(std::string parsed_string)
-{    
-    std::cout<<"started parsing fingerprint from string"<<std::endl;
-    std::size_t trash_delimetr = parsed_string.find('=');
-    if(trash_delimetr!=std::string::npos)
-    {
-        std::cout<<"removing trash: "<<parsed_string.substr(0,trash_delimetr+1)<<std::endl;
-        parsed_string = parsed_string.substr(trash_delimetr+1);
-    }    
-    std::stringstream split_stream(parsed_string);
-    std::string element;
-    while(std::getline(split_stream,element,':'))
-    {
-        std::string* new_values = new std::string[m_size+1];
-        for(unsigned int i=0;i<m_size;i++)
-            new_values[i] = m_values[i];
-        delete[] m_values;
-        new_values[m_size] = element;
-        m_size++;
-        m_values = new_values;
-    }
-    std::cout<<"parsed fingerprint from string successfully"<<std::endl;
-}
+
 
 

@@ -12,11 +12,13 @@
 class Fingerprint
 {
     public:
-        Fingerprint(const char* fingerprint_file_path);
-        Fingerprint(std::string string_fingerprint);
-
         void show();
         unsigned int get_size();
+
+        //code review # 4.3
+        bool parse_from_string(std::string full_fingerprint);
+        bool parse_from_file(const char* fingerprint_file_path);
+        bool is_valid() const;
 
         const std::string& operator[](std::size_t id);
 
@@ -26,7 +28,7 @@ class Fingerprint
         ~Fingerprint();
         
     private:
+        bool m_valid = false;
         std::string* m_values = nullptr;
         unsigned int m_size = 0;
-        void parse_from_string(std::string full_fingerprint);
 };

@@ -57,6 +57,7 @@ Fingerprint Certificate::get_fingerprint()
         if(pos!=(m_digest_size-1))ashex <<":";
     }
     //end of the segment
-
-    return Fingerprint(ashex.str());
+    Fingerprint rt_fingerptint;
+    rt_fingerptint.parse_from_string(ashex.str());
+    return rt_fingerptint;
 }

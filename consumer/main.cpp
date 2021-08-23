@@ -8,7 +8,8 @@
 
 int main()
 {
-    Fingerprint test_fingerprint("../../../consumer/test_digest.txt");
+    Fingerprint test_fingerprint;
+    test_fingerprint.parse_from_file("../../../consumer/test_digest.txt");
     std::cout<<std::endl;
     //create shared memory - aquire it's id
     int shared_status_memory_id;
