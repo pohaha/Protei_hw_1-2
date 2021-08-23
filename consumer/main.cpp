@@ -52,7 +52,7 @@ int main()
     std::memcpy(protocol,&current_package_status,sizeof(int));
 
     //recieve and compare data packages
-    Package* current_package;
+    Package current_package;
     std::cout<<"started recieving data packages"<<std::endl;
     for(int i = 0; i<data_packages_total; i++)
     {
@@ -61,12 +61,11 @@ int main()
               int(Package_Status::Sent))
         {
             //do nothing i gues...
-            std::cout<<"no packages recieved yet, press any key to refresh"<<std::endl;
+            std::cout<<"no packages recieved yet, press enter to refresh"<<std::endl;
             std::cin.get();
         }
-        
-        std::memcpy(current_package,message_box,sizeof(Package));
-        std::cout<<"From shared memory: "<<current_package->get_data()<<std::endl;
+        std::memcpy(&current_package,message_box,sizeof(Package));
+        std::cout<<"From shared memory: "<<current_package.get_data()<<std::endl;
         std::cout<<"From terminal output: "<<test_fingerprint[i]<<std::endl;
 
         //send reply

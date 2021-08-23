@@ -39,22 +39,21 @@ bool Fingerprint_Emitter::send()
         //protocol - sent logic
         current_package_status = (int)Package_Status::Sent;
         std::memcpy(protocol, &current_package_status,sizeof(int));
-        std::cout<<"sent package: "<<std::endl;
-        current_package.show();
-
+        std::cout<<"poackage sent"<<std::endl;
+        (static_cast<Package*>(message_box))->show();
         //await response
         while(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
         {
             //do nothing i gues...
-            std::cout<<"press any key"<<std::endl;
+           /*  std::cout<<"press any key"<<std::endl;
             std::cin.get();
             if(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
-                std::cout<<"no response from reciever yet"<<std::endl;
+                std::cout<<"no response from reciever yet"<<std::endl; */
         }
+        std::cout<<"poackage recieved"<<std::endl;
     }
+    std::cout<<"conversation finished. Terminating connection"<<std::endl;
 
-    delete message_box;
-    delete protocol;
     return true;
 }
 
