@@ -12,12 +12,12 @@
 class Certificate
 {
     private:
-        BIO* cert = nullptr;
-        X509* x509 = nullptr;
-        unsigned char digest[EVP_MAX_MD_SIZE] = "";
-        unsigned int digest_size = 0;
-        bool error_occured = false;
-        Fingerprint m_fingerprint;
+        bool m_invalid = false;
+        unsigned int m_digest_size = 0;
+        
+        unsigned char m_digest_data[EVP_MAX_MD_SIZE] = "";
+        BIO* m_cert = nullptr;
+        X509* m_x509 = nullptr;
     public:
     //c-tors
         Certificate();
@@ -28,5 +28,4 @@ class Certificate
     //actual_stuff
         void show();
         Fingerprint get_fingerprint();
-
 };
