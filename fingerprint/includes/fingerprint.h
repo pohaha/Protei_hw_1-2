@@ -31,4 +31,7 @@ class Fingerprint
         bool m_valid = false;
         std::string* m_values = nullptr;
         unsigned int m_size = 0;
+
+        //code review #8
+        std::string normalize_string(std::string fingerprint_with_trash);
 };

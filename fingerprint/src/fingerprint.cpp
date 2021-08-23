@@ -21,12 +21,9 @@ bool Fingerprint::parse_from_file(const char* fingerprint_file_path)
 bool Fingerprint::parse_from_string(std::string parsed_string)
 {    
     std::cout<<"started parsing fingerprint from string"<<std::endl;
-    std::size_t trash_delimetr = parsed_string.find('=');
-    if(trash_delimetr!=std::string::npos)
-    {
-        std::cout<<"removing trash: "<<parsed_string.substr(0,trash_delimetr+1)<<std::endl;
-        parsed_string = parsed_string.substr(trash_delimetr+1);
-    }
+
+    parsed_string = normalize_string(parsed_string);
+
     std::stringstream split_stream(parsed_string);
     std::string element;
     while(std::getline(split_stream,element,':'))
@@ -37,6 +34,7 @@ bool Fingerprint::parse_from_string(std::string parsed_string)
             new_values[i] = m_values[i];
         delete[] m_values;
         new_values[m_size] = element;
+        
         //codereview #6
         ++m_size;
         m_values = new_values;
@@ -133,6 +131,18 @@ Fingerprint::~Fingerprint()
 }
 
 
+std::string Fingerprint::normalize_string(std::string fingerprint_with_trash)
+{
+    std::string normalized_string = fingerprint_with_trash;
+    std::size_t trash_delimetr = fingerprint_with_trash.find('=');
+    if(trash_delimetr!=std::string::npos)
+    {
+        std::cout<<"removing trash: "<<fingerprint_with_trash.substr(0,trash_delimetr+1)<<std::endl;
+        normalized_string = fingerprint_with_trash.substr(trash_delimetr+1);
+    }
+
+    return normalized_string;
+}
 
 
 
