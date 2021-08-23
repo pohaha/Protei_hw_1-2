@@ -12,7 +12,7 @@
 class Certificate
 {
     private:
-        bool m_invalid = false;
+        bool m_valid = false;
         unsigned int m_digest_size = 0;
         
         unsigned char m_digest_data[EVP_MAX_MD_SIZE] = "";
