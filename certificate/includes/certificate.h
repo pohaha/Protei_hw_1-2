@@ -19,11 +19,12 @@ class Certificate
         BIO* m_cert = nullptr;
         X509* m_x509 = nullptr;
     public:
-    //c-tors
+        //code review # 11
         Certificate();
-
-    //d-tors 
         ~Certificate();
+
+        //code review # 9
+        bool is_valid();
 
     //actual_stuff
         void show();

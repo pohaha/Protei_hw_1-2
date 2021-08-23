@@ -8,7 +8,7 @@ Certificate::Certificate()
    {
        //TODO error handling
        std::cout<< "error occured opening certificate file"<<std::endl;
-       m_invalid = true;
+       m_valid = false;
        return;
    }
    m_x509 = PEM_read_bio_X509(m_cert, NULL, NULL, NULL);
@@ -17,14 +17,14 @@ Certificate::Certificate()
    {
        //TODO error handling
        std::cout<< "error occured reading certificate BIO"<<std::endl;
-       m_invalid = true;
+       m_valid = false;
        return;
    }
    if(X509_digest(m_x509, EVP_sha256(), m_digest_data, &m_digest_size) == 0)
    {
        //TODO error handling
        std::cout<< "error occured digesting certificate BIO"<<std::endl;
-       m_invalid = true;
+       m_valid = false;
        return;
    }
 
@@ -38,11 +38,17 @@ Certificate::~Certificate()
     X509_free(m_x509);
 }
 
+
 void Certificate::show()
 {
-    if(m_invalid) std::cout << "error occured - unable to show digest"<<std::endl;
+    if(not m_valid) std::cout << "error occured - unable to show digest"<<std::endl;
     std::cout<<"fingerprint: " <<std::endl;
     get_fingerprint().show();      
+}
+
+bool Certificate::is_valid()
+{
+    return m_valid;
 }
 
 Fingerprint Certificate::get_fingerprint()
