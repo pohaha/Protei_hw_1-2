@@ -50,7 +50,7 @@ bool Fingerprint_Emitter::send()
             if(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
                 std::cout<<"no response from reciever yet"<<std::endl; */
         }
-        std::cout<<"poackage recieved"<<std::endl;
+        std::cout<<"package recieved"<<std::endl;
     }
     std::cout<<"conversation finished. Terminating connection"<<std::endl;
 

@@ -9,7 +9,7 @@
 int main()
 {
     Fingerprint test_fingerprint("../../../consumer/test_digest.txt");
-    
+    std::cout<<std::endl;
     //create shared memory - aquire it's id
     int shared_status_memory_id;
     int shared_package_id;
@@ -41,12 +41,12 @@ int main()
         std::cout<<"no messages yet. Press enter to refresh"<<std::endl;
         std::cin.get();
     }
-
+    std::cout<<"recieved control package"<<std::endl;
     //basic data agregation (ie fingerprint size for main recieve loop)
     std::string package_content = static_cast<Package*>(message_box)->get_data();
     unsigned int data_packages_total = std::stoi(package_content);
     std::cout<<"Packages total: "<<data_packages_total<<std::endl;
-
+    std::cout<<std::endl;
     //send reply
     current_package_status = int(Package_Status::Recieved);
     std::memcpy(protocol,&current_package_status,sizeof(int));
