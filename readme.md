@@ -19,7 +19,6 @@ it sends a signal of package sent into shared protocol memory, and the package i
 once the reciever reads from shared memory - protocol memory is set to recieved and thus - allowing the producer to send another package. The process keeps on going according to the amount of packages - provided in control package which itself is an invitation for consumer to start communication.
 
 # TODO
-* according to coderewiev - solve the problems detected during the first part of HW
 * await codereview on the second part of HW
 * Architectural:
     * encapsulate an entity responsible for protocol (DRY principle on the reciever and consumer part)
@@ -28,4 +27,6 @@ once the reciever reads from shared memory - protocol memory is set to recieved 
 * User experience
     * make it so that there is an invitation for the recieve of the message
     * create safeguards from connection termination
+* Code reusability
+    * Abstract package creation logic (factory method pattern)
 
