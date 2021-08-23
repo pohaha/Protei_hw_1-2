@@ -1,9 +1,5 @@
-#pragma once
 #include <fingerprint.h>
-#include <stdio.h>
-#include <sstream>
-#include <string.h>
-#include <fstream>
+
 
 Fingerprint::Fingerprint(const char* fingerprint_file_path)
 {

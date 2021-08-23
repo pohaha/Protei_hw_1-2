@@ -2,8 +2,6 @@
 #include <certificate.h>
 #include <fingerprint.h>
 
-#include <iostream>
-
 int main()
 {
     Certificate test;

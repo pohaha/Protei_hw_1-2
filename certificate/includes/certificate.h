@@ -1,8 +1,13 @@
 #pragma once
+
+#include <fingerprint.h>
+
 #include <memory>
 #include <openssl/pem.h>
 #include <openssl/x509.h>
-#include <fingerprint.h>
+#include <iostream>
+#include <sstream>
+#include <string>
 
 class Certificate
 {

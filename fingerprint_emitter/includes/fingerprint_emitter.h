@@ -1,3 +1,5 @@
+#pragma once
+
 #include <fingerprint.h>
 #include <package.h>
 

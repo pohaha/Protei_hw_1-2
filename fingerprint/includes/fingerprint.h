@@ -1,9 +1,12 @@
 #pragma once
 
-#include<string>
-#include<iostream>
-#include<sstream>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <stdio.h>
+
 #include <package.h>
+
 
 class Fingerprint
 {

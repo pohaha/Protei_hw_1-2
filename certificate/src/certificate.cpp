@@ -1,13 +1,4 @@
-#pragma once
-#include <memory>
-#include <openssl/pem.h>
-#include <openssl/x509.h>
-#include <iostream>
-#include <sstream>
-#include <string>
-
 #include <certificate.h>
-#include <fingerprint.h>
 
 Certificate::Certificate()
 {
