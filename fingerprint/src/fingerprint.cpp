@@ -61,7 +61,8 @@ void Fingerprint::show()
     for(unsigned int i = 0; i < m_size; i++)
     {
         std::cout<<m_values[i];
-        if(i != m_size-1) std::cout<<":";
+        if(i != m_size-1) 
+            std::cout<<":";
     }
     std::cout<<std::endl;
 }

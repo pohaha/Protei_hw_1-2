@@ -41,7 +41,8 @@ Certificate::~Certificate()
 
 void Certificate::show()
 {
-    if(not m_valid) std::cout << "error occured - unable to show digest"<<std::endl;
+    if(not m_valid) 
+        std::cout << "error occured - unable to show digest"<<std::endl;
     std::cout<<"fingerprint: " <<std::endl;
     get_fingerprint().show();      
 }
@@ -60,7 +61,8 @@ Fingerprint Certificate::get_fingerprint()
     {
         ashex << hexbytes[ (m_digest_data[pos]&0xf0)>>4 ];        
         ashex << hexbytes[ (m_digest_data[pos]&0x0f)>>0 ];
-        if(pos!=(m_digest_size-1))ashex <<":";
+        if(pos!=(m_digest_size-1))
+            ashex <<":";
     }
     //end of the segment
     Fingerprint rt_fingerptint;

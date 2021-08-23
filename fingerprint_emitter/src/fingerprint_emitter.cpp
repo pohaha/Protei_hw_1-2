@@ -45,10 +45,6 @@ bool Fingerprint_Emitter::send()
         while(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
         {
             //do nothing i gues...
-           /*  std::cout<<"press any key"<<std::endl;
-            std::cin.get();
-            if(*(static_cast<int*>(protocol))!=int(Package_Status::Recieved))
-                std::cout<<"no response from reciever yet"<<std::endl; */
         }
         std::cout<<"package recieved"<<std::endl;
     }
