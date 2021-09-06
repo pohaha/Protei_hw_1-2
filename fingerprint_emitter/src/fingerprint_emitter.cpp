@@ -10,7 +10,8 @@ bool Fingerprint_Emitter::send()
     //create shared memory - aquire it's id
     int shared_package_id;
     //note to self - 0666 is wierd AF bitmask - do not touch
-    shared_package_id = shmget(key_t(9877), sizeof(Package), IPC_CREAT | 0666);
+    int key_id = 9877;
+    shared_package_id = shmget(key_t(key_id), sizeof(Package), 0666);
 
     if (shared_package_id < 0)
     {
